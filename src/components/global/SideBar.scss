@@ -1,0 +1,38 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #069274;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+// #2c3e50
+.sidebar h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  color: #1abc9c;
+}
