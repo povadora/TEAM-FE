@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import InputField from "../../components/fields/InputFields";
-import { useAuth } from "../../contexts/AuthContext";
+// import { useAuth } from "../../contexts/AuthContext";
 import axiosInstance from "../../utils/axiosInstance";
 
 interface UserData {
@@ -18,7 +18,6 @@ const LoginPage: React.FC = () => {
 
   const [error, setError] = useState<string>(""); // State to hold login error message
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUserData({
@@ -28,23 +27,25 @@ const LoginPage: React.FC = () => {
   };
 
   const handleButtonClick = async () => {
-    try {
-      const response = await axiosInstance.post(
-        "http://localhost:3001/accounts/auth-login",
-        {
-          userName: userData.username,
-          password: userData.password,
-        }
-      );
-      console.log("Login successful", response.data);
-      login(); // Assuming login function updates authentication state
-      navigate("/dashboard"); // Navigate to dashboard on successful login
-    } catch (error: any) {
-      console.error("Login failed:", error); // Log the error for debugging
-      setError(
-        "Login failed: " + (error.response?.data?.message || "Unknown error")
-      ); // Set error message based on response data
-    }
+    navigate("/dashboard");
+
+    // try {
+    //   const response = await axiosInstance.post(
+    //     "http://localhost:3001/accounts/auth-login",
+    //     {
+    //       userName: userData.username,
+    //       password: userData.password,
+    //     }
+    //   );
+    //   console.log("Login successful", response.data);
+
+    //   navigate("/dashboard"); // Navigate to dashboard on successful login
+    // } catch (error: any) {
+    //   console.error("Login failed:", error); // Log the error for debugging
+    //   setError(
+    //     "Login failed: " + (error.response?.data?.message || "Unknown error")
+    //   ); // Set error message based on response data
+    // }
   };
 
   return (
@@ -65,7 +66,7 @@ const LoginPage: React.FC = () => {
       />
       <br />
       <PrimaryButton buttonText="Login" handleButtonClick={handleButtonClick} />
-      {error && <p>{error}</p>} {/* Display error message if login fails */}
+      {error && <p>{error}</p>}
     </div>
   );
 };

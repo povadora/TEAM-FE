@@ -1,11 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const HouseholdPage: React.FC = () => {
   return (
     <div>
-      Household Page
-      <h1>THIS IS THE ACCOUNT</h1>
+      <h1>THIS IS THE HOUSEHOLD PAGE</h1>
       <h2>KA KINSA?</h2>
+      <Outlet />
     </div>
   );
 };
