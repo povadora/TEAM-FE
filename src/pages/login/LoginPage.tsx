@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="loginPage">
       <h1>Login</h1>
       <InputField
         placeholder="Enter username"
