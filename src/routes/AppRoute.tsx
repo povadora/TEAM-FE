@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "../pages/login/LoginPage";
 import DashboardPage from "../pages/admin-dashboard/DashboardPage";
 import HouseholdPage from "../pages/admin-household/HouseholdPage";
@@ -8,42 +8,43 @@ import AttendancePage from "../pages/admin-Qr code attendance/AttendancePage";
 import SettingsPage from "../pages/admin-system settings/SettingsPage";
 import LogoutPage from "../pages/admin-logout/LogoutPage";
 import PrintCertificatesPage from "../pages/admin-printcertificates/PrintcertificatesPage";
+import DashboardLayout from "../pages/layout/DashboardLayout";
 
 const router = createBrowserRouter([
   {
-    path: "/", // Root path
+    path: "/",
     element: <LoginPage />,
   },
   {
-    path: "/dashboard", // Dashboard root path
-    element: <DashboardPage />,
+    path: "/dashboard",
+    element: <DashboardLayout />,
     children: [
       {
-        path: "/", // Base path for DashboardPage itself
-        element: <Outlet />,
+        index: true,
+        element: <DashboardPage />,
       },
       {
-        path: "household", // Nested under /dashboard
+        path: "household",
         element: <HouseholdPage />,
       },
       {
-        path: "account", // Nested under /dashboard
+        path: "account",
         element: <AccountPage />,
       },
       {
-        path: "print-certificates", // Nested under /dashboard
+        path: "print-certificates",
         element: <PrintCertificatesPage />,
       },
       {
-        path: "attendance", // Nested under /dashboard
+        path: "attendance",
         element: <AttendancePage />,
       },
       {
-        path: "settings", // Nested under /dashboard
+        path: "settings",
         element: <SettingsPage />,
       },
       {
-        path: "logout", // Nested under /dashboard
+        path: "logout",
         element: <LogoutPage />,
       },
     ],

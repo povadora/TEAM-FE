@@ -1,10 +1,9 @@
-import React from "react";
-
+import DataTable from "../../components/table/DataTable";
 const AccountPage: React.FC = () => {
   return (
     <div>
-      <h1>THIS IS THE ACCOUNT</h1>
-      <h2>AURELL</h2>
+      <h1>Account Page</h1>
+      <DataTable />
     </div>
   );
 };

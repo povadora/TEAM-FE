@@ -1,59 +1,51 @@
 import React from "react";
 import "./SideBar.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
-interface SidebarProps {
-  handleButtonClick: (path: string) => void;
-  activeItem: string;
-}
+const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
 
-const Sidebar: React.FC<SidebarProps> = ({ handleButtonClick, activeItem }) => {
+  const handleButtonClick = (path: string) => {
+    navigate(`/dashboard/${path}`);
+  };
+
   return (
     <div className="sidebar">
       <PrimaryButton
         buttonText="Dashboard"
-        handleButtonClick={() => handleButtonClick("dashboard")}
-        className={`sidebar-button ${
-          activeItem === "dashboard" ? "active" : ""
-        }`}
+        handleButtonClick={() => handleButtonClick("")}
+        className="sidebar-button"
       />
       <PrimaryButton
         buttonText="Household"
         handleButtonClick={() => handleButtonClick("household")}
-        className={`sidebar-button ${
-          activeItem === "household" ? "active" : ""
-        }`}
+        className="sidebar-button"
       />
       <PrimaryButton
         buttonText="Account"
         handleButtonClick={() => handleButtonClick("account")}
-        className={`sidebar-button ${activeItem === "account" ? "active" : ""}`}
+        className="sidebar-button"
       />
       <PrimaryButton
         buttonText="Print Certificates"
         handleButtonClick={() => handleButtonClick("print-certificates")}
-        className={`sidebar-button ${
-          activeItem === "print-certificates" ? "active" : ""
-        }`}
+        className="sidebar-button"
       />
       <PrimaryButton
         buttonText="QR Attendance"
         handleButtonClick={() => handleButtonClick("attendance")}
-        className={`sidebar-button ${
-          activeItem === "attendance" ? "active" : ""
-        }`}
+        className="sidebar-button"
       />
       <PrimaryButton
         buttonText="System Settings"
         handleButtonClick={() => handleButtonClick("settings")}
-        className={`sidebar-button ${
-          activeItem === "settings" ? "active" : ""
-        }`}
+        className="sidebar-button"
       />
       <PrimaryButton
         buttonText="Log out"
         handleButtonClick={() => handleButtonClick("logout")}
-        className={`sidebar-button ${activeItem === "logout" ? "active" : ""}`}
+        className="sidebar-button"
       />
     </div>
   );
