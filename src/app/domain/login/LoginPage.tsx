@@ -1,9 +1,10 @@
-import React, { useState, ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
-import InputField from "../../components/fields/InputFields";
+import React, { useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
+import InputField from '../../shared/components/fields/InputFields';
 // import { useAuth } from "../../contexts/AuthContext";
-import axiosInstance from "../../utils/axiosInstance";
+
+import './LoginPage.scss';
 
 interface UserData {
   username: string;
@@ -12,11 +13,11 @@ interface UserData {
 
 const LoginPage: React.FC = () => {
   const [userData, setUserData] = useState<UserData>({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
-  const [error, setError] = useState<string>(""); // State to hold login error message
+  const [error, setError] = useState<string>(''); // State to hold login error message
   const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +28,7 @@ const LoginPage: React.FC = () => {
   };
 
   const handleButtonClick = async () => {
-    navigate("/dashboard");
+    navigate('/dashboard');
 
     // try {
     //   const response = await axiosInstance.post(

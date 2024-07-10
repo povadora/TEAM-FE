@@ -1,4 +1,4 @@
-import DataTable from "../../components/table/DataTable";
+import DataTable from '../../shared/components/table/DataTable';
 const AccountPage: React.FC = () => {
   return (
     <div>

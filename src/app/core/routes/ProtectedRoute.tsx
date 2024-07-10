@@ -1,6 +1,6 @@
-import React from "react";
-import { Navigate, Route, RouteProps } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import React from 'react';
+import { Navigate, Route, RouteProps } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 type ProtectedRouteProps = RouteProps & {
   element: React.ReactElement;
