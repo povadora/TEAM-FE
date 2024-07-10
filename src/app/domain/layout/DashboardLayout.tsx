@@ -1,7 +1,7 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import "../../App.scss";
-import Sidebar from "../../components/sidebar/SideBar";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import '../../app.scss';
+import Sidebar from '../../shared/components/sidebar/SideBar';
 
 const DashboardLayout: React.FC = () => {
   return (
