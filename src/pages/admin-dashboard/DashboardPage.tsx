@@ -1,13 +1,17 @@
 import React from "react";
 import DashboardCards from "../../components/card/DashboardCards";
-import DataTable from "../../components/table/DataTable";
+import DoughnutChart from "../../components/doughnutChart/doughnutChart";
 
 const DashboardPage: React.FC = () => {
   return (
     <div>
-      <h1>THIS IS THE DASHBOARD</h1>
+      <h1>Dashboard</h1>
+      <div style={{ width: "350px", height: "350px", margin: "0 auto" }}>
+        <DoughnutChart />
+        <DoughnutChart />
+        <DoughnutChart />
+      </div>
       <DashboardCards />
-      <DataTable />
     </div>
   );
 };

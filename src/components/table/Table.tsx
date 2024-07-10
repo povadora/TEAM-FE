@@ -14,6 +14,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
   return (
     <div>
       <table>
+        000
         <thead>
           <tr>
             {columns.map((column, index) => (

@@ -3,7 +3,7 @@ import React from "react";
 interface PrimaryButtonProps {
   buttonText: string;
   handleButtonClick: () => void;
-  className?: string; // Add className prop for custom styling
+  className?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
