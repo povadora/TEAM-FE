@@ -1,0 +1,29 @@
+// src/pages/admin-Qr code attendance/NewMeetingPage.scss
+.new-meeting-page {
+    padding: 20px;
+  
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+  
+      .input-field {
+        display: flex;
+        flex-direction: column;
+        label {
+          margin-bottom: 5px;
+        }
+        input {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+      }
+    }
+  }

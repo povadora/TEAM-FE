@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTachometerAlt, faHome, faUser, faPrint, faQrcode, faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import "./SideBar.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
-import SidebarHeader from "./SideBarHeader";
-import CustomModal from "../modal/CustomModal";
+import logo from "../../../../image/logo.jpg";
 
-const SideBar: React.FC = () => {
+import CustomModal from "../modal/CustomModal";
+const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,39 +30,42 @@ const SideBar: React.FC = () => {
 
   return (
     <div className="sidebar">
-      <SidebarHeader />
+      <div className="sidebar-header">
+        <img src={logo} alt="Logo" className="sidebar-logo" />
+        <h2 className="sidebar-title">Poblacion II, Tagbilaran City</h2>
+      </div>
       <PrimaryButton
-        buttonText="Dashboard"
+        buttonText={<><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</>}
         handleButtonClick={() => handleButtonClick("")}
         className="sidebar-button"
       />
       <PrimaryButton
-        buttonText="Household"
+        buttonText={<><FontAwesomeIcon icon={faHome} /> Household</>}
         handleButtonClick={() => handleButtonClick("household")}
         className="sidebar-button"
       />
       <PrimaryButton
-        buttonText="Account"
+        buttonText={<><FontAwesomeIcon icon={faUser} /> Account</>}
         handleButtonClick={() => handleButtonClick("account")}
         className="sidebar-button"
       />
       <PrimaryButton
-        buttonText="Print Certificates"
+        buttonText={<><FontAwesomeIcon icon={faPrint} /> Print Certificates</>}
         handleButtonClick={() => handleButtonClick("print-certificates")}
         className="sidebar-button"
       />
       <PrimaryButton
-        buttonText="QR Attendance"
+        buttonText={<><FontAwesomeIcon icon={faQrcode} /> QR Attendance</>}
         handleButtonClick={() => handleButtonClick("attendance")}
         className="sidebar-button"
       />
       <PrimaryButton
-        buttonText="System Settings"
+        buttonText={<><FontAwesomeIcon icon={faCog} /> System Settings</>}
         handleButtonClick={() => handleButtonClick("settings")}
         className="sidebar-button"
       />
       <PrimaryButton
-        buttonText="Log out"
+        buttonText={<><FontAwesomeIcon icon={faSignOutAlt} /> Log out</>}
         handleButtonClick={() => handleButtonClick("logout")}
         className="sidebar-button"
       />
@@ -74,4 +79,4 @@ const SideBar: React.FC = () => {
   );
 };
 
-export default SideBar;
+export default Sidebar;

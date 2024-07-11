@@ -15,6 +15,10 @@ import Incomplete from './domain/admin-household/incompleteProfile';
 import AddNewUser from './domain/admin-account/AddNewUser';
 import Health from './domain/admin-household/health';
 import Others from './domain/admin-household/others';
+import NewMeetingPage from "../app/domain/admin-Qr code attendance/NewMeetingPage";
+import MeetingDetailsPage from "../app/domain/admin-Qr code attendance/MeetingDetailsPage";
+import EditMeetingPage from "../app/domain/admin-Qr code attendance/EditMeetingPage";
+import ScanPage from "../app/domain/admin-Qr code attendance/ScanPage";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +74,23 @@ const router = createBrowserRouter([
         element: <AttendancePage />,
       },
       {
+        path: "new-meeting",
+        element: <NewMeetingPage />,
+      },
+      {
+        path: "meeting-details",
+        element: <MeetingDetailsPage />,
+      },
+      {
+        path: "edit-meeting",
+        element: <EditMeetingPage />,
+      },
+      {
+        path: "scan",
+        element: <ScanPage />,
+      },
+
+      {
         path: 'settings',
         element: <SettingsPage />,
       },
@@ -83,6 +104,7 @@ const router = createBrowserRouter([
       path: "/login",
       element: <LoginPage/>
     }
+
 ]);
 
 const AppRoutes: React.FC = () => {

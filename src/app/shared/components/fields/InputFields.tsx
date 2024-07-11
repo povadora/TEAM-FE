@@ -6,6 +6,7 @@ interface InputFieldProps {
   type: string;
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   name: string;
+  
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -13,6 +14,7 @@ const InputField: React.FC<InputFieldProps> = ({
   type,
   handleInputChange,
   name,
+
 }) => {
   return (
     <div className="inputField">
@@ -27,3 +29,4 @@ const InputField: React.FC<InputFieldProps> = ({
 };
 
 export default InputField;
+

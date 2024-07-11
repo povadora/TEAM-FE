@@ -40,6 +40,7 @@ const DoughnutChart: React.FC = () => {
     <div style={{ width: "300px", height: "300px", margin: "0 auto" }}>
       <Doughnut data={data} options={options} />
     </div>
+
   );
 };
 

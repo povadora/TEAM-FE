@@ -1,0 +1,20 @@
+// src/pages/admin-Qr code attendance/MeetingDEtailsPage.scss
+.meeting-details-page {
+    padding: 20px;
+  
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+  
+    .meeting-details {
+      margin-bottom: 20px;
+    }
+  
+    .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  
