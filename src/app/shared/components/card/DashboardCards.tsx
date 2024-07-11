@@ -16,10 +16,7 @@ const DashboardCards: React.FC = () => {
         <h3>Card 3</h3>
         <p>Some data here...</p>
       </div>
-      <div className="card">
-        <h3>Card 4</h3>
-        <p>Some data here...</p>
-      </div>
+      
     </div>
   );
 };

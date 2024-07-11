@@ -1,0 +1,26 @@
+.primary-button {
+    background-color: #ffffff; // white background for buttons
+    color: #000000; // black text color
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #dddddd; // light gray on hover
+    }
+    &.active {
+      font-weight: bold;
+      background-color: #d9534f; // red for active item background
+    }
+    &[aria-current="page"] {
+      font-weight: bold;
+      color: #d9534f; // red color for active link text
+    }
+  }
+  
+  

@@ -2,6 +2,12 @@
   padding: 15px 20px;
   cursor: pointer;
   &:hover {
-    background-color: #74828f;
+    background-color: #dddddd; // match light gray hover color
+  }
+
+  &.active {
+    font-weight: bold;
+    background-color: #d9534f; // red for active item background
   }
 }
+

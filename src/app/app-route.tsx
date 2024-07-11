@@ -9,6 +9,12 @@ import SettingsPage from './domain/admin-system settings/SettingsPage';
 import LogoutPage from './domain/admin-logout/LogoutPage';
 import PrintCertificatesPage from './domain/admin-printcertificates/PrintcertificatesPage';
 import DashboardLayout from './domain/layout/DashboardLayout';
+import AddInhabitant from './domain/admin-household/AddInhabitant';
+import Complete from './domain/admin-household/completeProfile';
+import Incomplete from './domain/admin-household/incompleteProfile';
+import AddNewUser from './domain/admin-account/AddNewUser';
+import Health from './domain/admin-household/health';
+import Others from './domain/admin-household/others';
 
 const router = createBrowserRouter([
   {
@@ -24,12 +30,36 @@ const router = createBrowserRouter([
         element: <DashboardPage />,
       },
       {
+        path: 'Add Inhabitant',
+        element: <AddInhabitant />,
+      },
+      {
+        path: 'health',
+        element: <Health />,
+      },
+      {
+        path: 'others',
+        element: <Others />,
+      },
+      {
         path: 'household',
         element: <HouseholdPage />,
       },
       {
+        path: 'complete-page',
+        element: <Complete />,
+      },
+      {
+        path: 'incomplete-page',
+        element: <Incomplete />,
+      },
+      {
         path: 'account',
         element: <AccountPage />,
+      },
+      {
+        path: 'add-new-user',
+        element: <AddNewUser />,
       },
       {
         path: 'print-certificates',
@@ -49,6 +79,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+    {
+      path: "/login",
+      element: <LoginPage/>
+    }
 ]);
 
 const AppRoutes: React.FC = () => {

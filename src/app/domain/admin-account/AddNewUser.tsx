@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import InputField from "../../components/fields/InputFields";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
+import InputField from "../../shared/components/fields/InputFields";
+import PrimaryButton from "../../shared/components/buttons/PrimaryButton";
 
 interface UserData {
   username: string;

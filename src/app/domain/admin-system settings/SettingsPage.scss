@@ -1,0 +1,36 @@
+.settings-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Full height to center vertically
+    background-color: #f8f9fa; // Light background for the settings page
+  }
+  
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff; // White background for content area
+    border-radius: 8px; // Rounded corners for the container
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for a lifted effect
+  }
+  
+  .content-button {
+    background-color: #d5d8db; // Light gray background for buttons
+    color: #2c3e50; // Dark blue text color
+    border: none;
+    padding: 15px 30px;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    width: 300px; // Match width as seen in the picture
+    text-align: left;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #aeb3b7; // Slightly darker gray on hover
+    }
+  }
+  

@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SideBar.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import SidebarHeader from "./SideBarHeader";
+import CustomModal from "../modal/CustomModal";
 
-const Sidebar: React.FC = () => {
+const SideBar: React.FC = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = (path: string) => {
-    navigate(`/dashboard/${path}`);
+    if (path === "logout") {
+      setIsModalOpen(true);
+    } else {
+      navigate(`/dashboard/${path}`);
+    }
+  };
+
+  const handleConfirmLogout = () => {
+    setIsModalOpen(false);
+    navigate("/dashboard/logout");
+  };
+
+  const handleCancelLogout = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className="sidebar">
+      <SidebarHeader />
       <PrimaryButton
         buttonText="Dashboard"
         handleButtonClick={() => handleButtonClick("")}
@@ -47,8 +64,14 @@ const Sidebar: React.FC = () => {
         handleButtonClick={() => handleButtonClick("logout")}
         className="sidebar-button"
       />
+      <CustomModal
+        isOpen={isModalOpen}
+        message="Are you sure you want to log out?"
+        onConfirm={handleConfirmLogout}
+        onCancel={handleCancelLogout}
+      />
     </div>
   );
 };
 
-export default Sidebar;
+export default SideBar;

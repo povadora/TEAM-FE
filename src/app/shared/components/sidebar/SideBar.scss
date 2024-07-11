@@ -1,6 +1,6 @@
 .sidebar {
   width: 250px;
-  background-color: #2c3e50;
+  background-color: #a4d56d; // match green color for sidebar background
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -8,8 +8,8 @@
 }
 
 .sidebar-button {
-  background-color: #34495e;
-  color: white;
+  background-color: #ffffff; // white background for buttons
+  color: #000000; // black text color
   margin-bottom: 10px;
   padding: 10px;
   border: none;
@@ -20,11 +20,11 @@
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #1abc9c;
+    background-color: #dddddd; // light gray on hover
   }
-  .sidebar-button[aria-current="page"] {
-    /* Styles for active link */
-    font-weight: bold; /* Example: Make active link bold */
-    color: #020203; /* Example: Change color for active link */
+
+  &[aria-current="page"] {
+    font-weight: bold;
+    color: #d9534f; // red color for active link text
   }
 }

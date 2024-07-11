@@ -1,9 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import InputField from "../../components/fields/InputFields";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
+import InputField from "../../shared/components/fields/InputFields";
+import PrimaryButton from "../../shared/components/buttons/PrimaryButton";
 import { ChangeEvent, useState } from "react";
 
-const AddNewHousehold: React.FC = () => {
+const AddInhabitant: React.FC = () => {
   interface UserData {
     picture: File | null;
     household_role: "";
@@ -49,11 +49,11 @@ const AddNewHousehold: React.FC = () => {
   };
 
   const handleButtonClick = async () => {
-    navigate("/dashboard/account");
+    navigate("/dashboard/household");
   };
 
   return (
-    <div className="newHousehold">
+    <div className="Add Inhabitant">
       <h1>Add New User</h1>
       <InputField
         placeholder="Choose a File"
@@ -125,9 +125,9 @@ const AddNewHousehold: React.FC = () => {
         name="mobilenumber"
       />
       <br />
-      <div className="newHouseholdAdded">
+      <div className="Add Inhabitant">
         <PrimaryButton
-          buttonText="Add New Household"
+          buttonText="Add Inhabitant"
           handleButtonClick={handleButtonClick}
         />
         <Outlet />
@@ -136,4 +136,4 @@ const AddNewHousehold: React.FC = () => {
   );
 };
 
-export default AddNewHousehold;
+export default AddInhabitant;

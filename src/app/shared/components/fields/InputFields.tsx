@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import './InputFields.scss';
 
 interface InputFieldProps {
   placeholder: string;
@@ -14,8 +15,7 @@ const InputField: React.FC<InputFieldProps> = ({
   name,
 }) => {
   return (
-    <div>
-      <label htmlFor={name}></label>
+    <div className="inputField">
       <input
         name={name}
         type={type}

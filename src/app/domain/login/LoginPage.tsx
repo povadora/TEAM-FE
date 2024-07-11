@@ -1,23 +1,23 @@
-import React, { useState, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
-import InputField from '../../shared/components/fields/InputFields';
-// import { useAuth } from "../../contexts/AuthContext";
-
+import React, { useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../../shared/components/buttons/PrimaryButton";
+import InputField from "../../shared/components/fields/InputFields";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './LoginPage.scss';
 
 interface UserData {
   username: string;
   password: string;
-}
+} 
 
 const LoginPage: React.FC = () => {
   const [userData, setUserData] = useState<UserData>({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
-  const [error, setError] = useState<string>(''); // State to hold login error message
+  const [error, setError] = useState<string>(""); // State to hold login error message
   const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
   };
 
   const handleButtonClick = async () => {
-    navigate('/dashboard');
+    navigate("/dashboard");
 
     // try {
     //   const response = await axiosInstance.post(
@@ -51,23 +51,35 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="loginPage">
-      <h1>Login</h1>
-      <InputField
-        placeholder="Enter username"
-        type="text"
-        handleInputChange={handleInputChange}
-        name="username"
-      />
-      <br />
-      <InputField
-        placeholder="Enter password"
-        type="password"
-        handleInputChange={handleInputChange}
-        name="password"
-      />
-      <br />
-      <PrimaryButton buttonText="Login" handleButtonClick={handleButtonClick} />
-      {error && <p>{error}</p>}
+      <div className="loginPage__image"></div>
+      <div className="loginForm">
+        <img src="/path-to-your-logo/logo.png" alt="Logo" className="logo" />
+        <h1>Login</h1>
+        <div className="inputField username">
+          <InputField
+            placeholder="Username"
+            type="text"
+            handleInputChange={handleInputChange}
+            name="username"
+          />
+          <span className="icon">
+            <FontAwesomeIcon icon={faUser} />
+          </span>
+        </div>
+        <div className="inputField password">
+          <InputField
+            placeholder="Password"
+            type="password"
+            handleInputChange={handleInputChange}
+            name="password"
+          />
+          <span className="icon">
+            <FontAwesomeIcon icon={faLock} />
+          </span>
+        </div>
+        <PrimaryButton buttonText="LOG-IN" handleButtonClick={handleButtonClick} />
+        {error && <p>{error}</p>}
+      </div>
     </div>
   );
 };

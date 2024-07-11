@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./SideBarItem.scss";
 
 interface SidebarItemProps {
   label: string;
   to: string;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ label, to }) => {
+const SideBarItem: React.FC<SidebarItemProps> = ({ label, to }) => {
   return (
     <NavLink
       to={to}
@@ -19,4 +20,4 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ label, to }) => {
   );
 };
 
-export default SidebarItem;
+export default SideBarItem;

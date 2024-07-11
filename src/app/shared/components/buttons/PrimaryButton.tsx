@@ -1,4 +1,5 @@
 import React from "react";
+import "./PrimaryButton.scss";
 
 interface PrimaryButtonProps {
   buttonText: string;
@@ -9,7 +10,7 @@ interface PrimaryButtonProps {
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   buttonText,
   handleButtonClick,
-  className,
+  className
 }) => {
   return (
     <button className={className} onClick={handleButtonClick}>
@@ -19,3 +20,4 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 };
 
 export default PrimaryButton;
+
