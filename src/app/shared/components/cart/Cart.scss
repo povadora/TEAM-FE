@@ -1,0 +1,22 @@
+// Cart.scss
+
+.cart {
+  border: 1px solid #a7a4a4;
+  border-radius: 20px; /* Rounded corners for modern look */
+  padding: 20px 10px; /* Increased padding for more space */
+  text-align: center;
+  background-color: #f2f2f2; /* Light background */
+  box-shadow: 0 0 10px rgba(22, 22, 22, 0.2); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Add space between each cart */
+
+  h3 {
+    margin: 0;
+    font-size: 1.8em; /* Larger font size for title */
+    color: #333; /* Darken heading color for contrast */
+  }
+
+  p {
+    font-size: 2.5em; /* Larger font size for value */
+    margin: 10px 0 0;
+  }
+}

@@ -1,45 +1,24 @@
-.dashboard-container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .cards-container {
+.dashboard {
+  .layout {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    flex-direction: column; /* Arrange items in a column */
+    align-items: stretch; /* Stretch items to full width */
+
+    .dashboard-card {
+      display: flex; /* Display cards in a row */
+      justify-content: space-between; /* Space evenly between cards */
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+      margin-bottom: 20px; /* Margin below cards */
+    }
+
+    .dashboard-table {
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    }
   }
-  
-  .charts-container {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .charts-container > div {
-    width: 250px;
-    height: 250px;
-  }
-  
-  .dashboard-cards {
-    display: flex;
-    flex: 1;
-    justify-content: space-around;
-  }
-  
-  .dashboard-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 10px;
-    width: 250px;
-    text-align: center;
-  }
-  
-  .dashboard-card h3 {
-    margin: 10px 0;
-  }
-  
-  .dashboard-card .chart-container {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-  }
-  
+}

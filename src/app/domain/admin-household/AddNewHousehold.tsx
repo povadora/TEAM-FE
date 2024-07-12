@@ -3,7 +3,7 @@ import InputField from '../../shared/components/fields/InputFields';
 import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
 import { ChangeEvent, useState } from 'react';
 
-const AddInhabitant: React.FC = () => {
+const AddNewHousehold: React.FC = () => {
   interface UserData {
     picture: File | null;
     household_role: '';
@@ -53,7 +53,7 @@ const AddInhabitant: React.FC = () => {
   };
 
   return (
-    <div className="Add Inhabitant">
+    <div className="newHousehold">
       <h1>Add New User</h1>
       <InputField
         placeholder="Choose a File"
@@ -125,9 +125,9 @@ const AddInhabitant: React.FC = () => {
         name="mobilenumber"
       />
       <br />
-      <div className="Add Inhabitant">
+      <div className="newHouseholdAdded">
         <PrimaryButton
-          buttonText="Add Inhabitant"
+          buttonText="Add New Household"
           handleButtonClick={handleButtonClick}
         />
         <Outlet />
@@ -136,4 +136,4 @@ const AddInhabitant: React.FC = () => {
   );
 };
 
-export default AddInhabitant;
+export default AddNewHousehold;

@@ -1,0 +1,13 @@
+.household {
+  .household-cart {
+    display: flex;
+    justify-content: space-between; /* Distribute carts evenly across the space */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px; /* Add margin for separation */
+
+    .household-cart-item {
+      flex: 1; /* Each item takes equal space */
+      margin: 0 5px; /* Adjust margin for spacing between items */
+    }
+  }
+}

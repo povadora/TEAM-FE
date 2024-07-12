@@ -1,2 +1,5 @@
 npm install sass sass-loader --save-dev
 https://react.dev/learn
+
+npm install socket.io-client
+npm install --save-dev node-sass

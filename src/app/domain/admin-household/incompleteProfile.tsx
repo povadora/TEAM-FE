@@ -1,6 +1,6 @@
-import React from "react";
-import DashboardCards from "../../shared/components/card/DashboardCards";
-import DataTable from "../../shared/components/table/DataTable";
+import React from 'react';
+import DashboardCards from '../../shared/components/card/DashboardCards';
+import DataTable from '../../shared/components/table/DataTable';
 
 const Incomplete: React.FC = () => {
   return (

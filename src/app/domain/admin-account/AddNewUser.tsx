@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import InputField from "../../shared/components/fields/InputFields";
-import PrimaryButton from "../../shared/components/buttons/PrimaryButton";
+import React, { ChangeEvent, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import InputField from '../../shared/components/fields/InputFields';
+import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
 
 interface UserData {
   username: string;
@@ -13,14 +13,14 @@ interface UserData {
 
 const AddNewUser: React.FC = () => {
   const [userData, setUserData] = useState<UserData>({
-    username: "",
-    password: "",
-    firstname: "",
-    lastname: "",
-    role: "",
+    username: '',
+    password: '',
+    firstname: '',
+    lastname: '',
+    role: '',
   });
 
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ const AddNewUser: React.FC = () => {
   };
 
   const handleButtonClick = async () => {
-    navigate("/dashboard/account");
+    navigate('/dashboard/account');
   };
 
   return (
