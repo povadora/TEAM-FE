@@ -84,7 +84,8 @@ const AddressForm: React.FC<AddressFormProps> = ({
               onChange={handleChange}
             />
 
-            {/* <FormInputField
+            {/* para sa locations
+             <FormInputField
               type="text"
               name="sitio"
               placeholder="Sitio"

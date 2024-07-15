@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddressForm from './AddressForm';
 import DetailsForm from './DetailsForm';
 import './AddNewHousehold.scss';
 import axiosInstance from '../../../core/utils/axiosInstance';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export interface HouseholdFormData {
   householdPhoto: File | null;
@@ -53,6 +54,23 @@ const AddNewHousehold: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<'address' | 'details'>(
     'address'
   );
+  const [isEditMode, setIsEditMode] = useState(false);
+  const { householdUuid } = useParams<{ householdUuid: string }>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (householdUuid) {
+      axiosInstance
+        .get(`/household/${householdUuid}`)
+        .then((response) => {
+          setFormData(response.data);
+          setIsEditMode(true);
+        })
+        .catch((error) => {
+          console.error('Error fetching household data:', error);
+        });
+    }
+  }, [householdUuid]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -75,49 +93,102 @@ const AddNewHousehold: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const formDataToSend = new FormData();
-      Object.keys(formData).forEach((key) => {
-        const value = formData[key as keyof HouseholdFormData];
-        if (value !== null) {
-          if (value instanceof File) {
-            formDataToSend.append(key, value);
-          } else {
-            formDataToSend.append(key, value.toString());
-          }
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach((key) => {
+      const value = formData[key as keyof HouseholdFormData];
+      if (value !== null) {
+        if (value instanceof File) {
+          formDataToSend.append(key, value);
+        } else {
+          formDataToSend.append(key, value.toString());
         }
-      });
+      }
+    });
 
-      const response = await axiosInstance.post(
-        '/household/create-household',
-        formDataToSend,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+    try {
+      const response = isEditMode
+        ? await axiosInstance.patch(
+            `/household/update-household/${householdUuid}`,
+            formDataToSend,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            }
+          )
+        : await axiosInstance.post(
+            '/household/create-household',
+            formDataToSend,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            }
+          );
 
       console.log(response.data);
-    } catch (error) {
-      console.error('There was an error submitting the form!', error);
+      navigate('/dashboard/household');
+    } catch (error: any) {
+      if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error(
+          'There was an error submitting the form!',
+          error.response.data
+        );
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error('No response received from the server!', error.request);
+      } else {
+        // Something else happened in making the request that triggered an error
+        console.error('Error', error.message);
+      }
     }
-    console.log(formData);
+  };
+
+  const handleDelete = async () => {
+    try {
+      if (householdUuid) {
+        await axiosInstance.delete(
+          `/household/delete-household/${householdUuid}`
+        );
+        console.log('Household deleted successfully');
+        navigate('/dashboard/household');
+        // Reset form or redirect to another page
+        // setFormData(initialFormData);
+        // setIsEditMode(false);
+      }
+    } catch (error) {
+      console.error('There was an error deleting the household!', error);
+    }
   };
 
   return (
     <div className="add-household-container">
       <section className="add-household-header">
-        <h1>Add New Household</h1>
+        <h1>{isEditMode ? 'Edit Household' : 'Add New Household'}</h1>
         <button type="submit" onClick={handleSubmit}>
-          Save
+          {isEditMode ? 'Update' : 'Save'}
         </button>
+        {isEditMode && (
+          <button type="button" onClick={handleDelete}>
+            Delete
+          </button>
+        )}
       </section>
-
       <div>
         <section>
-          <h2 onClick={() => setCurrentSection('address')}>Address</h2>
-          <h2 onClick={() => setCurrentSection('details')}>Details</h2>
+          <h2
+            onClick={() => setCurrentSection('address')}
+            className={currentSection === 'address' ? 'active' : ''}
+          >
+            Address
+          </h2>
+          <h2
+            onClick={() => setCurrentSection('details')}
+            className={currentSection === 'details' ? 'active' : ''}
+          >
+            Details
+          </h2>
           <hr></hr>
         </section>
 

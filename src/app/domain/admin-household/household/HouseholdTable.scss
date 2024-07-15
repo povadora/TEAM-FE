@@ -1,0 +1,26 @@
+.household-list-container {
+  h1 {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      border: 1px solid #585454;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #7a7575;
+    }
+
+    tr:hover {
+      background-color: #d6d0d0;
+      cursor: pointer;
+    }
+  }
+}

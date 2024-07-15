@@ -2,19 +2,10 @@ import DataTable from '../../shared/components/table/DataTable';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
 import DropdownButton from '../../shared/components/dropdown/dropdownButton';
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import Cart from '../../shared/components/cart/Cart';
-import useFetchHouseholds from '../../core/hooks/UseFetchHouseholds';
-import useWebSocket from '../../core/hooks/UseWebSocket';
-import { Inhabitant, Household } from './../../core/types';
 import './HouseholdPage.scss';
-
-// interface Totals {
-//   households: number;
-//   inhabitants: number;
-//   voters: number;
-//   nonVoters: number;
-// }
+import HouseholdTable from './household/HouseholdTable';
 
 const HouseholdPage: React.FC = () => {
   const navigate = useNavigate();
@@ -32,44 +23,6 @@ const HouseholdPage: React.FC = () => {
       console.log('Selected option: ${option}');
     }
   };
-
-  // const [totals, setTotals] = useState<Totals>({
-  //   households: 0,
-  //   inhabitants: 0,
-  //   voters: 0,
-  //   nonVoters: 0,
-  // });
-
-  // const { data, error, loading } = useFetchHouseholds();
-
-  // const initializeTotals = useCallback((households: Household[]) => {
-  //   const initialTotals = households.reduce(
-  //     (acc, household) => {
-  //       acc.households += 1;
-  //       acc.inhabitants += household.inhabitants?.length || 0;
-  //       acc.voters +=
-  //         household.inhabitants?.filter(
-  //           (inhabitant) => inhabitant.isRegisteredVoter
-  //         ).length || 0;
-  //       acc.nonVoters +=
-  //         household.inhabitants?.filter(
-  //           (inhabitant) => !inhabitant.isRegisteredVoter
-  //         ).length || 0;
-  //       return acc;
-  //     },
-  //     { households: 0, inhabitants: 0, voters: 0, nonVoters: 0 }
-  //   );
-  //   setTotals(initialTotals);
-  // }, []);
-
-  // React.useEffect(() => {
-  //   if (data) {
-  //     initializeTotals(data);
-  //   }
-  // }, [data, initializeTotals]);
-
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="household">
@@ -126,7 +79,7 @@ const HouseholdPage: React.FC = () => {
 
       {/* dri and para sa table */}
       <div className="household-table">
-        <DataTable />
+        <HouseholdTable />
         <PrimaryButton
           buttonText="Add Inhabitant"
           handleButtonClick={() =>
