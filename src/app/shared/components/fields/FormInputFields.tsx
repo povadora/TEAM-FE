@@ -1,18 +1,19 @@
 import React, { ChangeEvent } from 'react';
-import './InputFields.scss';
 
-interface InputFieldProps {
+interface FormInputFieldProps {
   type: string;
   name: string;
   placeholder: string;
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  value: string | number;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const FormInputField: React.FC<FormInputFieldProps> = ({
   type,
   name,
   placeholder,
-  handleInputChange,
+  value,
+  onChange,
 }) => {
   return (
     <div className="inputField">
@@ -20,10 +21,11 @@ const InputField: React.FC<InputFieldProps> = ({
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={handleInputChange}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
 };
 
-export default InputField;
+export default FormInputField;

@@ -14,11 +14,24 @@ interface InputFieldProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ type, placeholder, icon, value, name, onChange }) => {
+const InputField: React.FC<InputFieldProps> = ({
+  type,
+  placeholder,
+  icon,
+  value,
+  name,
+  onChange,
+}) => {
   return (
     <div className="input-field">
       <div className="icon">{icon}</div>
-      <input type={type} placeholder={placeholder} value={value} name={name} onChange={onChange} />
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        name={name}
+        onChange={onChange}
+      />
     </div>
   );
 };
@@ -30,7 +43,9 @@ interface MainButtonProps {
 
 const MainButton: React.FC<MainButtonProps> = ({ text, onClick }) => {
   return (
-    <button className="main-button" onClick={onClick}>{text}</button>
+    <button className="main-button" onClick={onClick}>
+      {text}
+    </button>
   );
 };
 
@@ -42,8 +57,8 @@ const LoginForm: React.FC = () => {
 
   const handleLogin = () => {
     // Handle login logic here, e.g., API call, state update, etc.
-    console.log("Username:", username);
-    console.log("Password:", password);
+    console.log('Username:', username);
+    console.log('Password:', password);
     // Navigate to dashboard after handling login
     navigate('/dashboard');
     // Reset the form after handling login

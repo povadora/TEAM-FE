@@ -1,7 +1,7 @@
 import DataTable from '../../shared/components/table/DataTable';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
-import DropdownButton from '../../shared/components/dropdownButton/dropdownButton';
+import DropdownButton from '../../shared/components/dropdown/dropdownButton';
 import React, { useState, useCallback } from 'react';
 import Cart from '../../shared/components/cart/Cart';
 import useFetchHouseholds from '../../core/hooks/UseFetchHouseholds';
@@ -9,17 +9,17 @@ import useWebSocket from '../../core/hooks/UseWebSocket';
 import { Inhabitant, Household } from './../../core/types';
 import './HouseholdPage.scss';
 
-interface Totals {
-  households: number;
-  inhabitants: number;
-  voters: number;
-  nonVoters: number;
-}
+// interface Totals {
+//   households: number;
+//   inhabitants: number;
+//   voters: number;
+//   nonVoters: number;
+// }
 
 const HouseholdPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleButtonClick = async (path: string) => {
+  const hanldeButtonClick = async (path: string) => {
     navigate(path);
   };
 
@@ -33,43 +33,43 @@ const HouseholdPage: React.FC = () => {
     }
   };
 
-  const [totals, setTotals] = useState<Totals>({
-    households: 0,
-    inhabitants: 0,
-    voters: 0,
-    nonVoters: 0,
-  });
+  // const [totals, setTotals] = useState<Totals>({
+  //   households: 0,
+  //   inhabitants: 0,
+  //   voters: 0,
+  //   nonVoters: 0,
+  // });
 
-  const { data, error, loading } = useFetchHouseholds();
+  // const { data, error, loading } = useFetchHouseholds();
 
-  const initializeTotals = useCallback((households: Household[]) => {
-    const initialTotals = households.reduce(
-      (acc, household) => {
-        acc.households += 1;
-        acc.inhabitants += household.inhabitants?.length || 0;
-        acc.voters +=
-          household.inhabitants?.filter(
-            (inhabitant) => inhabitant.isRegisteredVoter
-          ).length || 0;
-        acc.nonVoters +=
-          household.inhabitants?.filter(
-            (inhabitant) => !inhabitant.isRegisteredVoter
-          ).length || 0;
-        return acc;
-      },
-      { households: 0, inhabitants: 0, voters: 0, nonVoters: 0 }
-    );
-    setTotals(initialTotals);
-  }, []);
+  // const initializeTotals = useCallback((households: Household[]) => {
+  //   const initialTotals = households.reduce(
+  //     (acc, household) => {
+  //       acc.households += 1;
+  //       acc.inhabitants += household.inhabitants?.length || 0;
+  //       acc.voters +=
+  //         household.inhabitants?.filter(
+  //           (inhabitant) => inhabitant.isRegisteredVoter
+  //         ).length || 0;
+  //       acc.nonVoters +=
+  //         household.inhabitants?.filter(
+  //           (inhabitant) => !inhabitant.isRegisteredVoter
+  //         ).length || 0;
+  //       return acc;
+  //     },
+  //     { households: 0, inhabitants: 0, voters: 0, nonVoters: 0 }
+  //   );
+  //   setTotals(initialTotals);
+  // }, []);
 
-  React.useEffect(() => {
-    if (data) {
-      initializeTotals(data);
-    }
-  }, [data, initializeTotals]);
+  // React.useEffect(() => {
+  //   if (data) {
+  //     initializeTotals(data);
+  //   }
+  // }, [data, initializeTotals]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="household">
@@ -80,9 +80,9 @@ const HouseholdPage: React.FC = () => {
         </div>
         <div>
           <PrimaryButton
-            buttonText="Add Inhabitant"
+            buttonText="Add Household"
             handleButtonClick={() =>
-              handleButtonClick('/dashboard/Add Inhabitant')
+              hanldeButtonClick('/dashboard/add-household')
             }
           />
         </div>
@@ -90,16 +90,16 @@ const HouseholdPage: React.FC = () => {
 
       <div className="household-cart">
         <div className="household-cart-item">
-          <Cart title="Households" value={totals.households} />
+          <Cart />
         </div>
         <div className="household-cart-item">
-          <Cart title="Inhabitants" value={totals.inhabitants} />
+          <Cart />
         </div>
         <div className="household-cart-item">
-          <Cart title="Voters" value={totals.voters} />
+          <Cart />
         </div>
         <div className="household-cart-item">
-          <Cart title="Non-Voters" value={totals.nonVoters} />
+          <Cart />
         </div>
       </div>
 
@@ -130,7 +130,7 @@ const HouseholdPage: React.FC = () => {
         <PrimaryButton
           buttonText="Add Inhabitant"
           handleButtonClick={() =>
-            handleButtonClick('/dashboard/Add Inhabitant')
+            hanldeButtonClick('/dashboard/add-inhabitant')
           }
         />
       </div>

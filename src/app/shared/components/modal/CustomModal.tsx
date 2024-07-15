@@ -1,5 +1,5 @@
-import React from "react";
-import "./CustomModal.scss";
+import React from 'react';
+import './CustomModal.scss';
 
 interface CustomModalProps {
   isOpen: boolean;
@@ -8,7 +8,12 @@ interface CustomModalProps {
   onCancel: () => void;
 }
 
-const CustomModal: React.FC<CustomModalProps> = ({ isOpen, message, onConfirm, onCancel }) => {
+const CustomModal: React.FC<CustomModalProps> = ({
+  isOpen,
+  message,
+  onConfirm,
+  onCancel,
+}) => {
   if (!isOpen) return null;
 
   return (

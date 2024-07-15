@@ -2,11 +2,11 @@ import React from 'react';
 import './Cart.scss';
 
 interface CartProps {
-  title: string;
-  value: number;
+  // title: string;
+  // value: number;
 }
 
-const Cart: React.FC<CartProps> = ({ title, value }) => {
+const Cart: React.FC<CartProps> = () => {
   const getValueColor = (title: string): string => {
     switch (title.toLowerCase()) {
       case 'households':
@@ -24,8 +24,8 @@ const Cart: React.FC<CartProps> = ({ title, value }) => {
   return (
     <div className="dashboard-cart">
       <div className="cart">
-        <h3>{title}</h3>
-        <p style={{ color: getValueColor(title) }}>{value}</p>
+        <h3></h3>
+        {/* <p style={{ color: getValueColor(title) }}>{value}</p> */}
       </div>
     </div>
   );
