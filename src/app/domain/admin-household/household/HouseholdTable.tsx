@@ -32,14 +32,14 @@ interface Household {
   //   inhabitants: Inhabitant[];
 }
 const HouseholdTable: React.FC = () => {
-  const [households, setHouseholds] = useState<Household[]>([]); // Specify the type as Household[]
+  const [households, setHouseholds] = useState<Household[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
       .get('/household/all-household')
       .then((response) => {
-        setHouseholds(response.data); // Assuming response.data is an array of Household objects
+        setHouseholds(response.data);
       })
       .catch((error) => {
         console.error('Error fetching households:', error);

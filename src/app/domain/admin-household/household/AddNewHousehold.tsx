@@ -72,6 +72,10 @@ const AddNewHousehold: React.FC = () => {
     }
   }, [householdUuid]);
 
+  const hanldeButtonClick = async (path: string) => {
+    navigate(path);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -96,7 +100,7 @@ const AddNewHousehold: React.FC = () => {
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       const value = formData[key as keyof HouseholdFormData];
-      if (value !== null) {
+      if (value !== null && value !== undefined) {
         if (value instanceof File) {
           formDataToSend.append(key, value);
         } else {
@@ -130,21 +134,17 @@ const AddNewHousehold: React.FC = () => {
       navigate('/dashboard/household');
     } catch (error: any) {
       if (error.response) {
-        // Server responded with a status other than 200 range
         console.error(
           'There was an error submitting the form!',
           error.response.data
         );
       } else if (error.request) {
-        // Request was made but no response received
         console.error('No response received from the server!', error.request);
       } else {
-        // Something else happened in making the request that triggered an error
         console.error('Error', error.message);
       }
     }
   };
-
   const handleDelete = async () => {
     try {
       if (householdUuid) {
@@ -153,9 +153,6 @@ const AddNewHousehold: React.FC = () => {
         );
         console.log('Household deleted successfully');
         navigate('/dashboard/household');
-        // Reset form or redirect to another page
-        // setFormData(initialFormData);
-        // setIsEditMode(false);
       }
     } catch (error) {
       console.error('There was an error deleting the household!', error);
@@ -170,9 +167,16 @@ const AddNewHousehold: React.FC = () => {
           {isEditMode ? 'Update' : 'Save'}
         </button>
         {isEditMode && (
-          <button type="button" onClick={handleDelete}>
-            Delete
-          </button>
+          <>
+            <button type="button" onClick={handleDelete}>
+              Delete
+            </button>
+            <button
+              onClick={() => hanldeButtonClick('/dashboard/add-inhabitant')}
+            >
+              Add Occupant
+            </button>
+          </>
         )}
       </section>
       <div>
