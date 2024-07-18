@@ -1,19 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import './DashboardPage.scss';
 import DashboardCards from '../../shared/components/card/DashboardCards';
-import DataTable from '../../shared/components/table/DataTable';
+import DashboardChart from '../../shared/components/doughnutChart/DashboardChart';
 
 const DashboardPage: React.FC = () => {
   return (
-    <div className="dashboard">
-      <div className="layout">
-        <div className="dashboard-card">
-          <div className="dashboard-card-item">
-            <DashboardCards />
-          </div>
+    <div className="layout">
+      <h1>Barangay Dashboard</h1>
+      <div className="dashboard-card">
+        <DashboardCards />
+      </div>
+      <div className="charts-container">
+        <div className="chart-wrapper">
+          <DashboardChart chartType="genderData" />
         </div>
-        <div className="dashboard-table">
-          <DataTable />
+        <div className="chart-wrapper">
+          <DashboardChart chartType="votersData" />
+        </div>
+        <div className="chart-wrapper">
+          <DashboardChart chartType="ageData" />
         </div>
       </div>
     </div>

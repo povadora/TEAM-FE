@@ -9,18 +9,31 @@
 
     th,
     td {
-      border: 1px solid #585454;
+      border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
     }
 
     th {
-      background-color: #7a7575;
+      background-color: #f2f2f2;
     }
 
-    tr:hover {
-      background-color: #d6d0d0;
-      cursor: pointer;
+    .household-info {
+      display: flex;
+      justify-content: space-between;
+      background-color: #e8e8e8;
+      font-weight: bold;
+
+      .household-details {
+        flex: 1;
+      }
+
+      .household-action {
+        flex: 0;
+        button {
+          margin: 5px;
+        }
+      }
     }
   }
 }

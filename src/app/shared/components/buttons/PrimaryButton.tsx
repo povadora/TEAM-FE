@@ -3,10 +3,10 @@ import { IconType } from 'react-icons';
 
 interface PrimaryButtonProps {
   buttonText: ReactNode;
-  icon?: IconType; // Icon prop using react-icons
+  icon?: IconType;
   handleButtonClick?: () => void;
-  type?: 'button' | 'submit' | 'reset'; // Button type prop
-  className?: string; // Optional class name for styling
+  type?: 'button' | 'submit' | 'reset';
+  className?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -24,7 +24,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     >
       {Icon && (
         <span className="button-icon">
-          <Icon /> {/* Wrap the icon in a span */}
+          <Icon />
         </span>
       )}
       {buttonText}

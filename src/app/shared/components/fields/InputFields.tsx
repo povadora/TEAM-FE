@@ -3,24 +3,27 @@ import './InputFields.scss';
 
 interface InputFieldProps {
   type: string;
-  name: string;
   placeholder: string;
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  icon: React.ReactNode;
+  name: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
   type,
-  name,
   placeholder,
-  handleInputChange,
+  icon,
+  name,
+  onChange,
 }) => {
   return (
-    <div className="inputField">
+    <div className="input-field">
+      <div className="icon">{icon}</div>
       <input
         type={type}
-        name={name}
         placeholder={placeholder}
-        onChange={handleInputChange}
+        name={name}
+        onChange={onChange}
       />
     </div>
   );

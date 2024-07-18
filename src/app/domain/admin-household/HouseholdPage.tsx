@@ -1,4 +1,3 @@
-import DataTable from '../../shared/components/table/DataTable';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
 import DropdownButton from '../../shared/components/dropdown/dropdownButton';
@@ -64,20 +63,6 @@ const HouseholdPage: React.FC = () => {
           onSelect={handleDropdownSelect}
         />
       </div>
-      {/* <PrimaryButton
-          buttonText="Personal"
-          handleButtonClick={() => console.log('Personal button clicked')}
-        />
-        <PrimaryButton
-          buttonText="Health"
-          handleButtonClick={() => console.log('Health button clicked')}
-        />
-        <PrimaryButton
-          buttonText="Others"
-          handleButtonClick={() => console.log('Others button clicked')}
-        /> */}
-
-      {/* dri and para sa table */}
       <div className="household-table">
         <HouseholdTable />
         <PrimaryButton

@@ -1,69 +1,53 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './LoginPage.scss';
-import logo from '../../../image/logo.jpg';
+import logo from './../../../image/final.png';
 import barangayImage from '../../../image/login.jpg';
 import { FaUser, FaLock } from 'react-icons/fa';
+import axiosInstance from '../../core/utils/axiosInstance';
+import InputField from '../../shared/components/fields/InputFields';
+import LoginButton from '../../shared/components/buttons/LoginButton';
 
-interface InputFieldProps {
-  type: string;
-  placeholder: string;
-  icon: React.ReactNode;
-  value: string;
-  name: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+interface UserData {
+  username: string;
+  password: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
-  type,
-  placeholder,
-  icon,
-  value,
-  name,
-  onChange,
-}) => {
-  return (
-    <div className="input-field">
-      <div className="icon">{icon}</div>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        name={name}
-        onChange={onChange}
-      />
-    </div>
-  );
-};
+const LoginPage: React.FC = () => {
+  const [userData, setUserData] = useState<UserData>({
+    username: '',
+    password: '',
+  });
 
-interface MainButtonProps {
-  text: string;
-  onClick?: () => void;
-}
-
-const MainButton: React.FC<MainButtonProps> = ({ text, onClick }) => {
-  return (
-    <button className="main-button" onClick={onClick}>
-      {text}
-    </button>
-  );
-};
-
-const LoginForm: React.FC = () => {
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserData({
+      ...userData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  const handleLogin = () => {
-    // Handle login logic here, e.g., API call, state update, etc.
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Navigate to dashboard after handling login
+  const onClick = async () => {
     navigate('/dashboard');
-    // Reset the form after handling login
-    setUsername('');
-    setPassword('');
+    try {
+      const response = await axiosInstance.post(
+        'http://localhost:3001/accounts/auth-login',
+        {
+          userName: userData.username,
+          password: userData.password,
+        }
+      );
+      console.log('Login successful', response.data);
+      navigate('/dashboard');
+    } catch (error: any) {
+      <p>ERROR</p>;
+      console.error('Login failed:', error);
+      setError(
+        'Login failed: ' + (error.response?.data?.message || 'Unknown error')
+      );
+    }
   };
 
   useEffect(() => {
@@ -71,12 +55,6 @@ const LoginForm: React.FC = () => {
       alert(location.state.message);
     }
   }, [location.state]);
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name === 'username') setUsername(value);
-    if (name === 'password') setPassword(value);
-  };
 
   return (
     <div className="login-container">
@@ -88,12 +66,11 @@ const LoginForm: React.FC = () => {
           <img src={logo} alt="Logo" />
         </div>
         <h1 className="login-title">LOG-IN</h1>
-        <form>
+        <form className="log-in-form">
           <InputField
             type="text"
             placeholder="Username"
             icon={<FaUser />}
-            value={username}
             name="username"
             onChange={handleInputChange}
           />
@@ -101,21 +78,13 @@ const LoginForm: React.FC = () => {
             type="password"
             placeholder="Password"
             icon={<FaLock />}
-            value={password}
             name="password"
             onChange={handleInputChange}
           />
-          <MainButton text="LOG-IN" onClick={handleLogin} />
+          <LoginButton text="LOG-IN" onClick={onClick} />
         </form>
+        {error && <p>{error}</p>}
       </div>
-    </div>
-  );
-};
-
-const LoginPage: React.FC = () => {
-  return (
-    <div>
-      <LoginForm />
     </div>
   );
 };

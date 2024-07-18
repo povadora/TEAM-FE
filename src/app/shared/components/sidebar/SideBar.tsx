@@ -12,17 +12,19 @@ import {
 import './SideBar.scss';
 import PrimaryButton from '../buttons/PrimaryButton';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../../../image/logo.jpg';
-
+import logo from '../../../../image/sidebar.png';
 import CustomModal from '../modal/CustomModal';
+
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeButton, setActiveButton] = useState('');
 
   const handleButtonClick = (path: string) => {
     if (path === 'logout') {
       setIsModalOpen(true);
     } else {
+      setActiveButton(path); // Set the active button
       navigate(`/dashboard/${path}`);
     }
   };
@@ -45,65 +47,98 @@ const Sidebar: React.FC = () => {
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
+            <span className="icon">
+              <FontAwesomeIcon icon={faTachometerAlt} />
+            </span>
+            <span className="text">Dashboard</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('')}
-        className="sidebar-button"
+        className={`sidebar-button ${activeButton === '' ? 'active' : ''}`}
       />
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faHome} /> Household
+            <span className="icon">
+              <FontAwesomeIcon icon={faHome} />
+            </span>
+            <span className="text">Household</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('household')}
-        className="sidebar-button"
+        className={`sidebar-button ${
+          activeButton === 'household' ? 'active' : ''
+        }`}
       />
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faUser} /> Account
+            <span className="icon">
+              <FontAwesomeIcon icon={faUser} />
+            </span>
+            <span className="text">Account</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('account')}
-        className="sidebar-button"
+        className={`sidebar-button ${
+          activeButton === 'account' ? 'active' : ''
+        }`}
       />
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faPrint} /> Print Certificates
+            <span className="icon">
+              <FontAwesomeIcon icon={faPrint} />
+            </span>
+            <span className="text">Print Certificates</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('print-certificates')}
-        className="sidebar-button"
+        className={`sidebar-button ${
+          activeButton === 'print-certificates' ? 'active' : ''
+        }`}
       />
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faQrcode} /> QR Attendance
+            <span className="icon">
+              <FontAwesomeIcon icon={faQrcode} />
+            </span>
+            <span className="text">QR Attendance</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('attendance')}
-        className="sidebar-button"
+        className={`sidebar-button ${
+          activeButton === 'attendance' ? 'active' : ''
+        }`}
       />
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faCog} /> System Settings
+            <span className="icon">
+              <FontAwesomeIcon icon={faCog} />
+            </span>
+            <span className="text">System Settings</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('settings')}
-        className="sidebar-button"
+        className={`sidebar-button ${
+          activeButton === 'settings' ? 'active' : ''
+        }`}
       />
       <PrimaryButton
         buttonText={
           <>
-            <FontAwesomeIcon icon={faSignOutAlt} /> Log out
+            <span className="icon">
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </span>
+            <span className="text">Log out</span>
           </>
         }
         handleButtonClick={() => handleButtonClick('logout')}
-        className="sidebar-button"
+        className={`sidebar-button ${
+          activeButton === 'logout' ? 'active' : ''
+        }`}
       />
       <CustomModal
         isOpen={isModalOpen}

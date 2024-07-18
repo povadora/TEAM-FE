@@ -1,14 +1,10 @@
 .sidebar {
   width: 250px;
-  background-color: #8cdb74;
+  background-color: #43543d;
   padding: 20px;
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.sidebar {
-  // Existing styles
 
   &-header {
     text-align: center;
@@ -22,28 +18,41 @@
     .sidebar-title {
       font-size: 16px;
       font-weight: bold;
+      color: white;
     }
   }
 }
 
 .sidebar-button {
-  background-color: white;
-  color: black;
+  background-color: #43543d;
+  color: white;
   margin-bottom: 10px;
-  padding: 25px;
+  padding: 15px 25px; /* Adjusted padding */
   border: none;
   cursor: pointer;
   font-size: 16px;
   text-align: left;
   width: 100%;
   transition: background-color 0.3s;
+  display: flex; /* Use Flexbox */
+  align-items: center; /* Center items vertically */
+  border-radius: 50px; /* Use border-radius to create oval shape */
 
   &:hover {
-    background-color: #00c0ff;
+    background-color: #8cdb74;
   }
-  .sidebar-button[aria-current='page'] {
-    /* Styles for active link */
-    font-weight: bold; /* Example: Make active link bold */
-    color: #020203; /* Example: Change color for active link */
+
+  .icon {
+    margin-right: 10px; /* Add space between icon and text */
+  }
+
+  .text {
+    flex-grow: 1; /* Make text take up the remaining space */
+  }
+
+  &.active {
+    background-color: #8cdb74; /* The same color as hover */
+    font-weight: bold;
+    color: #020203;
   }
 }
