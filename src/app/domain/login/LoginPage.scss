@@ -22,16 +22,16 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 
 .logo {
-  margin-bottom: 120px;
+  margin-bottom: 10px;
 }
 
 .logo img {
-  width: 280px; /* Set the desired width */
-  height: auto; /* Maintain aspect ratio */
+  width: 280px;
+  height: auto;
 }
 
 form {
@@ -40,24 +40,25 @@ form {
 }
 
 .input-field {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .input-field .icon {
   position: absolute;
-  right: 50px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: white;
+  color: black;
 }
 
 .input-field input {
-  flex: 1;
+  width: 100%;
   padding: 10px;
-  border: 1px solid white;
-  border-radius: 4px;
+  padding-left: 40px;
+  box-sizing: border-box;
+  border: 1px solid #2ccd5b;
+  border-radius: 5px;
 }
 
 .main-button {
@@ -73,28 +74,6 @@ form {
 
 .main-button:hover {
   background-color: #0056b3;
-}
-
-.input-field {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.input-field input {
-  width: 100%;
-  padding: 10px;
-  padding-left: 40px;
-  box-sizing: border-box;
-  border: 1px solid #2CCD5B;
-  border-radius: 5px;
-}
-
-.input-field .icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: black;
 }
 
 .login-form {
@@ -124,8 +103,8 @@ form {
   font-size: 2rem;
   font-weight: 500;
   text-align: center;
-  margin-top: 30px; /* Reduce margin-top to place it closer to the logo */
-  margin-bottom: 20px; /* Adjust if you want space below the text */
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .main-button {

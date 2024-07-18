@@ -19,11 +19,11 @@ export interface InhabitantFormData {
   householdRole: householdRole | null;
   inhabitantGender: inhabitantGender | null;
   isRepresentative: boolean;
-  date: string;
+  birthday: string;
   email: string;
-  inhabitantCivilStatus: inhabitantCivilStatus | null;
+  civilStatus: inhabitantCivilStatus | null;
   mobileNumber: string;
-  inhabitantBloodType: inhabitantBloodType | null;
+  bloodType: inhabitantBloodType | null;
   healthRemarks: string;
   isPersonWithDisability: boolean | null;
   disabilityDetails: string;
@@ -47,11 +47,11 @@ const initialFormData: InhabitantFormData = {
   householdRole: null,
   inhabitantGender: null,
   isRepresentative: false,
-  date: '',
+  birthday: '',
   email: '',
-  inhabitantCivilStatus: null,
+  civilStatus: null,
   mobileNumber: '',
-  inhabitantBloodType: null,
+  bloodType: null,
   healthRemarks: '',
   isPersonWithDisability: null,
   disabilityDetails: '',
@@ -72,22 +72,28 @@ const AddInhabitant: React.FC = () => {
   >('personal');
   const [formData, setFormData] = useState<InhabitantFormData>(initialFormData);
   const [isEditMode, setIsEditMode] = useState(false);
-  const { householdUuid } = useParams<{ householdUuid: string }>();
   const navigate = useNavigate();
+  const params = useParams();
+  console.log('params:', params);
+  const { householdUuid, accountUuid } = params as {
+    householdUuid: string;
+    accountUuid?: string;
+  };
 
-  // useEffect(() => {
-  //   if (householdUuid) {
-  //     axiosInstance
-  //       .get(`/household/${householdUuid}`)
-  //       .then((response) => {
-  //         setFormData(response.data);
-  //         setIsEditMode(true);
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error fetching household data:', error);
-  //       });
-  //   }
-  // }, [householdUuid]);
+  useEffect(() => {
+    console.log('householdUuid:', householdUuid);
+    if (accountUuid) {
+      axiosInstance
+        .get(`/inhabitant/${accountUuid}`)
+        .then((response) => {
+          setFormData(response.data);
+          setIsEditMode(true);
+        })
+        .catch((error) => {
+          console.error('Error fetching household data:', error);
+        });
+    }
+  }, [accountUuid, householdUuid]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -133,6 +139,11 @@ const AddInhabitant: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!householdUuid) {
+      console.error('Household UUID is undefined!');
+      return;
+    }
+
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       const value = formData[key as keyof InhabitantFormData];
@@ -148,7 +159,7 @@ const AddInhabitant: React.FC = () => {
     try {
       const response = isEditMode
         ? await axiosInstance.patch(
-            `/household/update-household/${householdUuid}`,
+            `/inhabitant/update-inhabitant/${householdUuid}`,
             formDataToSend,
             {
               headers: {
@@ -157,7 +168,7 @@ const AddInhabitant: React.FC = () => {
             }
           )
         : await axiosInstance.post(
-            '/inhabitant/create-inhabitant',
+            `/inhabitant/create-inhabitant/${householdUuid}`,
             formDataToSend,
             {
               headers: {
@@ -165,11 +176,14 @@ const AddInhabitant: React.FC = () => {
               },
             }
           );
-
+      isEditMode
+        ? alert('Updated Successfully!')
+        : alert('Added Successfully!');
       console.log(response.data);
       navigate('/dashboard/household');
     } catch (error: any) {
       if (error.response) {
+        alert('Error attempt!');
         console.error(
           'There was an error submitting the form!',
           error.response.data
@@ -181,38 +195,18 @@ const AddInhabitant: React.FC = () => {
       }
     }
   };
-  const handleDelete = async () => {
-    try {
-      if (householdUuid) {
-        await axiosInstance.delete(
-          `/household/delete-household/${householdUuid}`
-        );
-        console.log('Household deleted successfully');
-        navigate('/dashboard/household');
-      }
-    } catch (error) {
-      console.error('There was an error deleting the household!', error);
-    }
-  };
 
   return (
     <div className="Add Inhabitant">
       <section>
         <div className="header-title">
-          <h1>{isEditMode ? 'Edit Inhabitant' : 'Add New Inhabitannt'}</h1>
+          <h1>{isEditMode ? 'Edit Inhabitant' : 'Add New Inhabitant'}</h1>
         </div>
         <div className="header-buttons">
           <div>
             <button type="submit" onClick={handleSubmit}>
               {isEditMode ? 'Update' : 'Save'}
             </button>
-          </div>
-          <div>
-            {isEditMode && (
-              <button type="button" onClick={handleDelete}>
-                Delete
-              </button>
-            )}
           </div>
         </div>
       </section>

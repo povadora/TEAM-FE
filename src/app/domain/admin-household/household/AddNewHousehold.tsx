@@ -131,9 +131,10 @@ const AddNewHousehold: React.FC = () => {
           );
 
       console.log(response.data);
-      navigate('/dashboard/household');
+      isEditMode ? alert('Updated Succesfully!') : alert('Added Succesfully!');
     } catch (error: any) {
       if (error.response) {
+        <p>There was an error submitting the form!</p>;
         console.error(
           'There was an error submitting the form!',
           error.response.data
@@ -152,6 +153,7 @@ const AddNewHousehold: React.FC = () => {
           `/household/delete-household/${householdUuid}`
         );
         console.log('Household deleted successfully');
+        alert('Deleted Succesfully!');
         navigate('/dashboard/household');
       }
     } catch (error) {
@@ -172,7 +174,9 @@ const AddNewHousehold: React.FC = () => {
               Delete
             </button>
             <button
-              onClick={() => hanldeButtonClick('/dashboard/add-inhabitant')}
+              onClick={() =>
+                hanldeButtonClick(`/dashboard/add-inhabitant/${householdUuid}`)
+              }
             >
               Add Occupant
             </button>

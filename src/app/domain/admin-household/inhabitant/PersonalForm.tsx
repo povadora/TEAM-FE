@@ -40,9 +40,9 @@ interface PersonalFormProps {
     householdRole: householdRole | null;
     inhabitantGender: inhabitantGender | null;
     isRepresentative: boolean;
-    date: string;
+    birthday: string;
     email: string;
-    inhabitantCivilStatus: inhabitantCivilStatus | null;
+    civilStatus: inhabitantCivilStatus | null;
     mobileNumber: string;
   };
 
@@ -68,7 +68,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
         <h4>Personal</h4>
         <label>Profile Photo</label>
         <br></br>
-        <input type="file" name="inhabitantPhoto" onChange={handleFileChange} />
+        <input type="file" name="profilePhoto" onChange={handleFileChange} />
         <br></br>
 
         <label>Household Role</label>
@@ -121,9 +121,9 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
 
         <FormInputField
           type="date"
-          name="date"
+          name="birthday"
           placeholder="Birthday"
-          value={formData.date}
+          value={formData.birthday}
           onChange={handleChange}
         />
       </section>
@@ -140,12 +140,10 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
 
         <label>Civil Status</label>
         <Dropdown<inhabitantCivilStatus>
-          name="inhabitantCivilStatus"
+          name="civilStatus"
           values={inhabitantCivilStatus}
-          selectedValue={formData.inhabitantCivilStatus}
-          onChange={(value) =>
-            handleDropdownChange('inhabitantCivilStatus', value)
-          }
+          selectedValue={formData.civilStatus}
+          onChange={(value) => handleDropdownChange('civilStatus', value)}
         />
         <FormInputField
           type="text"

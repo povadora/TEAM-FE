@@ -14,7 +14,7 @@ export enum inhabitantBloodType {
 
 interface HealthFormProps {
   formData: {
-    inhabitantBloodType: inhabitantBloodType | null;
+    bloodType: inhabitantBloodType | null;
     healthRemarks: string;
     isPersonWithDisability: boolean | null;
     disabilityDetails: string;
@@ -46,12 +46,10 @@ const HealthForm: React.FC<HealthFormProps> = ({
         <h4>General</h4>
         <label>Blood Type</label>
         <Dropdown<inhabitantBloodType>
-          name="inhabitantBloodType"
+          name="bloodType"
           values={inhabitantBloodType}
-          selectedValue={formData.inhabitantBloodType}
-          onChange={(value) =>
-            handleDropdownChange('inhabitantBloodType', value)
-          }
+          selectedValue={formData.bloodType}
+          onChange={(value) => handleDropdownChange('bloodType', value)}
         />
         <FormInputField
           type="text"

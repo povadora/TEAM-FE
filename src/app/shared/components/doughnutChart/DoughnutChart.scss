@@ -1,0 +1,44 @@
+DoughnutChart.scss .chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start (left) of the container */
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.chart-legend {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column; /* Align items in a column (vertical order) */
+  align-items: flex-start; /* Align items to the start (left) of the container */
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust spacing between legend items */
+  justify-content: flex-start;
+}
+
+.legend-color {
+  width: 12px; /* Adjust the size of the color square */
+  height: 12px;
+  margin-right: 8px; /* Adjust spacing between color square and label */
+  border-radius: 3px; /* Rounded corners for the color square */
+  flex-shrink: 0; /* Prevent color square from shrinking */
+}
+
+.legend-label {
+  font-size: 14px; /* Adjust font size for the legend label */
+  margin-right: 5px; /* Adjust spacing between label and percentage */
+}
+
+.legend-value {
+  font-size: 14px; /* Adjust font size for the legend value */
+}

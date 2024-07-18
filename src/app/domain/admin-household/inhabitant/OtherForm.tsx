@@ -54,14 +54,6 @@ const OtherForm: React.FC<OtherFormProps> = ({
           selectedValue={formData.studentDetails}
           onChange={(value) => handleDropdownChange('studentDetails', value)}
         />
-
-        <FormInputField
-          type="text"
-          name="placeOfRegistration"
-          placeholder="Place of Registration"
-          value={formData.placeOfRegistration}
-          onChange={handleChange}
-        />
         <label>Is Registered Voter</label>
         <Checkbox
           name="isRegisteredVoter"

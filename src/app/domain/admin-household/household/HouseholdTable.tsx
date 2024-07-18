@@ -3,10 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../core/utils/axiosInstance';
 import './HouseholdTable.scss';
 
+interface Inhabitant {
+  inhabitantId: number;
+  inhabitantUuid: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  birthday?: Date;
+  gender?: string;
+  mobileNumber?: string;
+  civilStatus?: string;
+  householdRole?: string;
+  createdAt: Date;
+  isRegisteredVoter: boolean;
+}
+
 interface Household {
   householdId: number;
   householdUuid: string;
-  householdPhoto?: string;
   householdNumber: string;
   householdName: string;
   streetName?: string;
@@ -14,23 +28,10 @@ interface Household {
   zone?: string;
   sitio?: string;
   purok?: string;
-  barangay: string;
-  municipality: string;
-  province: string;
-  structureMaterials?: string;
-  numberOfRooms?: string;
-  numberOfToilets?: string;
-  allowBoarders?: boolean;
-  hasRentalPermit?: boolean;
-  hasBackyardGarden?: boolean;
-  otherIncomeSource?: string;
-  numberOfPets?: string;
-  numberOfTwoWheeledVehicles?: string;
-  numberOfThreeWheeledVehicles?: string;
-  numberOfFourWheeledVehicles?: string;
   createdAt: Date;
-  //   inhabitants: Inhabitant[];
+  inhabitants: Inhabitant[];
 }
+
 const HouseholdTable: React.FC = () => {
   const [households, setHouseholds] = useState<Household[]>([]);
   const navigate = useNavigate();
@@ -50,35 +51,76 @@ const HouseholdTable: React.FC = () => {
     navigate(`/dashboard/edit-household/${householdUuid}`);
   };
 
+  const handleAddInhabitant = (householdUuid: string) => {
+    navigate(`/dashboard/add-inhabitant/${householdUuid}`);
+  };
+
   return (
     <div className="household-list-container">
       <h1>Household List</h1>
       <table>
         <thead>
           <tr>
-            <th>Household Number</th>
-            <th>Household Name</th>
-            <th>Street Name</th>
-            <th>Subdivision</th>
-            <th>Zone</th>
-            <th>Sitio</th>
-            <th>Purok</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Civil Status</th>
+            <th>Household Role</th>
+            <th>Date</th>
+            <th>Voter</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {households.map((household) => (
-            <tr
-              key={household.householdUuid} // Use householdUuid as key
-              onClick={() => handleRowClick(household.householdUuid)}
-            >
-              <td>{household.householdNumber}</td>
-              <td>{household.householdName}</td>
-              <td>{household.streetName}</td>
-              <td>{household.subdivision}</td>
-              <td>{household.zone}</td>
-              <td>{household.sitio}</td>
-              <td>{household.purok}</td>
-            </tr>
+            <React.Fragment key={household.householdUuid}>
+              <tr>
+                <td colSpan={10} className="household-info">
+                  <div
+                    className="household-details"
+                    onClick={() => handleRowClick(household.householdUuid)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {`${household.householdNumber} ${household.householdName} ${
+                      household.streetName || ''
+                    } ${household.subdivision || ''} ${household.zone || ''} ${
+                      household.sitio || ''
+                    } ${household.purok || ''}`}
+                  </div>
+                  <div className="household-action">
+                    <button
+                      onClick={() =>
+                        handleAddInhabitant(household.householdUuid)
+                      }
+                    >
+                      Add Inhabitant
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              {household.inhabitants.map((inhabitant) => (
+                <tr key={inhabitant.inhabitantUuid}>
+                  <td>{`${inhabitant.firstName} ${
+                    inhabitant.middleName || ''
+                  } ${inhabitant.lastName}`}</td>
+                  <td>
+                    {inhabitant.birthday
+                      ? new Date(inhabitant.birthday).toLocaleDateString()
+                      : ''}
+                  </td>
+                  <td>{inhabitant.gender}</td>
+                  <td>{inhabitant.mobileNumber}</td>
+                  <td>{inhabitant.civilStatus}</td>
+                  <td>{inhabitant.householdRole}</td>
+                  <td>{new Date(inhabitant.createdAt).toLocaleDateString()}</td>
+                  <td>{inhabitant.isRegisteredVoter ? 'Yes' : 'No'}</td>
+                  <td>Status</td>
+                  <td>Actions</td>
+                </tr>
+              ))}
+            </React.Fragment>
           ))}
         </tbody>
       </table>

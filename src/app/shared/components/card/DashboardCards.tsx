@@ -1,22 +1,37 @@
-import React from "react";
-import "./DashboardCards.scss";
+import React from 'react';
+import { FaMars, FaVoteYea, FaChartPie } from 'react-icons/fa';
+import './DashboardCards.scss';
 
 const DashboardCards: React.FC = () => {
   return (
     <div className="dashboard-cards">
       <div className="card">
-        <h3>Card 1</h3>
-        <p>Some data here...</p>
+        <div className="card-content">
+          <FaMars className="icon" />
+          <div className="text-center">
+            <h3>Gender Bracket</h3>
+            <p>11,200 Population</p>
+          </div>
+        </div>
       </div>
       <div className="card">
-        <h3>Card 2</h3>
-        <p>Some data here...</p>
+        <div className="card-content">
+          <FaVoteYea className="icon" />
+          <div className="text-center">
+            <h3>Voters Bracket</h3>
+            <p>10,500 Population</p>
+          </div>
+        </div>
       </div>
       <div className="card">
-        <h3>Card 3</h3>
-        <p>Some data here...</p>
+        <div className="card-content">
+          <FaChartPie className="icon" />
+          <div className="text-center">
+            <h3>Age Bracket</h3>
+            <p>11,200 Population</p>
+          </div>
+        </div>
       </div>
-      
     </div>
   );
 };

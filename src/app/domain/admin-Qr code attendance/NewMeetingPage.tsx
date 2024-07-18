@@ -1,10 +1,8 @@
-// src/pages/admin-Qr code attendance/NewMeetingPage.tsx
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
-import InputField from '../../shared/components/fields/InputFields'; // Ensure correct import path
 import './NewMeetingPage.scss';
+import MeetingInputFields from '../../shared/components/fields/MeetingInputFields';
+import SubmitButton from '../../shared/components/buttons/SubmitButton';
 
 const NewMeetingPage: React.FC = () => {
   const [meetingData, setMeetingData] = useState({
@@ -12,15 +10,10 @@ const NewMeetingPage: React.FC = () => {
     information: '',
     date: '',
     time: '',
-    agenda: ''
+    agenda: '',
   });
 
   const navigate = useNavigate();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setMeetingData(prevState => ({ ...prevState, [name]: value }));
-  };
 
   const handleSaveClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,27 +22,63 @@ const NewMeetingPage: React.FC = () => {
   };
 
   const handleBackClick = () => {
-    navigate('/dashboard/attendance');
+    navigate('/dashboard');
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setMeetingData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
     <div className="new-meeting-page">
       <div className="top-bar">
-        <PrimaryButton buttonText="Back" handleButtonClick={handleBackClick} />
+        <button type="button" onClick={handleBackClick}>
+          BACK
+        </button>
       </div>
       <form onSubmit={handleSaveClick}>
         <label>Meeting Title</label>
-        <InputField  name="title" type="text" placeholder='' handleInputChange={handleInputChange} />
-        <label>Meetig information</label>
-        <InputField  name="information" type="text" placeholder=''handleInputChange={handleInputChange} />
+        <MeetingInputFields
+          name="title"
+          type="text"
+          placeholder=""
+          handleInputChange={handleChange}
+        />
+        <label>Meeting Information</label>
+        <MeetingInputFields
+          name="information"
+          type="text"
+          placeholder=""
+          handleInputChange={handleChange}
+        />
         <label>Date</label>
-        <InputField  name="date" type="date" placeholder='' handleInputChange={handleInputChange} />
+        <MeetingInputFields
+          name="date"
+          type="date"
+          placeholder=""
+          handleInputChange={handleChange}
+        />
         <label>Time</label>
-        <InputField  name="time" type="time" placeholder='' handleInputChange={handleInputChange} />
+        <MeetingInputFields
+          name="time"
+          type="time"
+          placeholder=""
+          handleInputChange={handleChange}
+        />
         <label>Agenda Notes</label>
-        <InputField  name="agenda" type="text" placeholder='' handleInputChange={handleInputChange} />
+        <MeetingInputFields
+          name="agenda"
+          type="text"
+          placeholder=""
+          handleInputChange={handleChange}
+        />
+
         <div className="button-container">
-          <PrimaryButton buttonText="Save" type="submit" />
+          <SubmitButton type="submit" buttonText="Save" />
         </div>
       </form>
     </div>

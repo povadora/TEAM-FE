@@ -1,20 +1,19 @@
+// SubmitButton.tsx
 import React from 'react';
 
 interface SubmitButtonProps {
   type: 'submit';
-  className: string;
-  handleSubmit: () => void;
+  handleSubmit?: () => void;
   buttonText: string;
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({
   type,
-  className,
   handleSubmit,
   buttonText,
 }) => {
   return (
-    <button type={type} className={className} onClick={handleSubmit}>
+    <button type={type} onClick={handleSubmit}>
       {buttonText}
     </button>
   );
