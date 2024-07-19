@@ -1,12 +1,20 @@
 import React from 'react';
+import { IconType } from 'react-icons';
 import './Cart.scss';
 
 interface CartProps {
-  // title: string;
-  // value: number;
+  title: string;
+  value: number;
+  icon: IconType; // Icon prop for react-icons
+  description: string; // Add description prop
 }
 
-const Cart: React.FC<CartProps> = () => {
+const Cart: React.FC<CartProps> = ({
+  title,
+  value,
+  icon: Icon,
+  description,
+}) => {
   const getValueColor = (title: string): string => {
     switch (title.toLowerCase()) {
       case 'households':
@@ -21,11 +29,18 @@ const Cart: React.FC<CartProps> = () => {
         return '#000'; // Default color if title does not match
     }
   };
+
   return (
     <div className="dashboard-cart">
       <div className="cart">
-        <h3></h3>
-        {/* <p style={{ color: getValueColor(title) }}>{value}</p> */}
+        <div className="cart-header">
+          <h3>{title}</h3>
+          <div className="cart-icon">
+            <Icon size={30} /> {/* Render the icon */}
+          </div>
+        </div>
+        <p style={{ color: getValueColor(title) }}>{value}</p>
+        <p className="description">{description}</p>
       </div>
     </div>
   );

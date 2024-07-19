@@ -16,7 +16,11 @@ const AttendancePage: React.FC = () => {
   return (
     <div className="attendance-page">
       <div className="top-bar">
-        <PrimaryButton buttonText="New Meeting" icon={FaPlus} handleButtonClick={handleNewMeetingClick} />
+        <PrimaryButton
+          buttonText="New Meeting"
+          icon={FaPlus}
+          handleButtonClick={handleNewMeetingClick}
+        />
       </div>
       <h2>Meeting Title</h2>
       <table className="meeting-table">
@@ -28,9 +32,7 @@ const AttendancePage: React.FC = () => {
             <th>Penalties</th>
           </tr>
         </thead>
-        <tbody>
-          {/* Render table rows here */}
-        </tbody>
+        <tbody>{/* Render table rows here */}</tbody>
       </table>
     </div>
   );

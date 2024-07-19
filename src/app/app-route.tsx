@@ -41,6 +41,10 @@ const router = createBrowserRouter([
         element: <AddInhabitant />,
       },
       {
+        path: 'edit-inhabitant/:householdUuid/:inhabitantUuid',
+        element: <AddInhabitant />,
+      },
+      {
         path: 'household',
         element: <HouseholdPage />,
       },

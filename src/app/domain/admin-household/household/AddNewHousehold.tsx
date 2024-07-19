@@ -132,6 +132,7 @@ const AddNewHousehold: React.FC = () => {
 
       console.log(response.data);
       isEditMode ? alert('Updated Succesfully!') : alert('Added Succesfully!');
+      navigate('/dashboard/household');
     } catch (error: any) {
       if (error.response) {
         <p>There was an error submitting the form!</p>;

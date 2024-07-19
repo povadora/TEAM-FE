@@ -1,15 +1,23 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  FaHome,
+  FaUsers,
+  FaVoteYea,
+  FaUserSlash,
+  FaPlus,
+} from 'react-icons/fa';
 import PrimaryButton from '../../shared/components/buttons/PrimaryButton';
 import DropdownButton from '../../shared/components/dropdown/dropdownButton';
-import React from 'react';
 import Cart from '../../shared/components/cart/Cart';
 import './HouseholdPage.scss';
 import HouseholdTable from './household/HouseholdTable';
+import SearchBar from '../../shared/components/fields/SearchBar';
 
 const HouseholdPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const hanldeButtonClick = async (path: string) => {
+  const handleButtonClick = async (path: string) => {
     navigate(path);
   };
 
@@ -19,58 +27,99 @@ const HouseholdPage: React.FC = () => {
     } else if (option === 'Incomplete') {
       navigate('/dashboard/incomplete-page');
     } else {
-      console.log('Selected option: ${option}');
+      console.log(`Selected option: ${option}`);
     }
+  };
+
+  const handleSearch = (query: string) => {
+    console.log(`Search query: ${query}`);
+    // Implement search functionality here
   };
 
   return (
     <div className="household">
-      {/* // para sa header ug buttons */}
       <div className="household-header-button">
         <div>
           <h1>HOUSEHOLD PAGE</h1>
         </div>
-        <div>
+        <div className="header-buttons">
           <PrimaryButton
-            buttonText="Add Household"
+            buttonText="New Household"
+            icon={FaPlus}
             handleButtonClick={() =>
-              hanldeButtonClick('/dashboard/add-household')
+              handleButtonClick('/dashboard/add-household')
             }
+            className="new-household"
+          />
+          <PrimaryButton
+            buttonText="Others"
+            icon={FaPlus}
+            handleButtonClick={() => console.log('Others button clicked')}
+            className="new-household"
           />
         </div>
       </div>
 
       <div className="household-cart">
         <div className="household-cart-item">
-          <Cart />
+          <Cart
+            title="Households"
+            value={150}
+            icon={FaHome}
+            description="Total households for this year"
+          />
         </div>
         <div className="household-cart-item">
-          <Cart />
+          <Cart
+            title="Inhabitants"
+            value={450}
+            icon={FaUsers}
+            description="Total inhabitants for this year"
+          />
         </div>
         <div className="household-cart-item">
-          <Cart />
+          <Cart
+            title="Voters"
+            value={200}
+            icon={FaVoteYea}
+            description="Total voters for this year"
+          />
         </div>
         <div className="household-cart-item">
-          <Cart />
+          <Cart
+            title="Non-Voters"
+            value={50}
+            icon={FaUserSlash}
+            description="Total non-voters for this year"
+          />
         </div>
       </div>
 
-      {/* search/sort */}
       <div className="household-search-sort">
+        <SearchBar placeholder="Search..." onSearch={handleSearch} />
         <DropdownButton
           buttonText="View Profile"
+          options={['Complete', 'Incomplete']}
+          onSelect={handleDropdownSelect}
+        />
+        <DropdownButton
+          buttonText="Age Bracket"
+          options={['Complete', 'Incomplete']}
+          onSelect={handleDropdownSelect}
+        />
+        <DropdownButton
+          buttonText="Deceased"
+          options={['Alive', 'Deceased']}
+          onSelect={handleDropdownSelect}
+        />
+        <DropdownButton
+          buttonText="Birthday"
           options={['Complete', 'Incomplete']}
           onSelect={handleDropdownSelect}
         />
       </div>
       <div className="household-table">
         <HouseholdTable />
-        <PrimaryButton
-          buttonText="Add Inhabitant"
-          handleButtonClick={() =>
-            hanldeButtonClick('/dashboard/add-inhabitant')
-          }
-        />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../core/utils/axiosInstance';
 import './HouseholdTable.scss';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 interface Inhabitant {
   inhabitantId: number;
@@ -53,6 +54,26 @@ const HouseholdTable: React.FC = () => {
 
   const handleAddInhabitant = (householdUuid: string) => {
     navigate(`/dashboard/add-inhabitant/${householdUuid}`);
+  };
+
+  const handleEdit = (inhabitantUuid: string, householdUuid: string) => {
+    navigate(`/dashboard/edit-inhabitant/${householdUuid}/${inhabitantUuid}`);
+  };
+
+  const handleDelete = async (inhabitantUuid: string) => {
+    try {
+      if (inhabitantUuid) {
+        await axiosInstance.delete(
+          `/inhabitant/delete-inhabitant/${inhabitantUuid}`
+        );
+        console.log('Inhabitant deleted successfully');
+        alert('Deleted Successfully!');
+        navigate('/dashboard/household');
+      }
+    } catch (error) {
+      alert('Error attempt to delete');
+      console.error('There was an error deleting the household!', error);
+    }
   };
 
   return (
@@ -117,7 +138,23 @@ const HouseholdTable: React.FC = () => {
                   <td>{new Date(inhabitant.createdAt).toLocaleDateString()}</td>
                   <td>{inhabitant.isRegisteredVoter ? 'Yes' : 'No'}</td>
                   <td>Status</td>
-                  <td>Actions</td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        handleEdit(
+                          inhabitant.inhabitantUuid,
+                          household.householdUuid
+                        )
+                      }
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(inhabitant.inhabitantUuid)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </React.Fragment>

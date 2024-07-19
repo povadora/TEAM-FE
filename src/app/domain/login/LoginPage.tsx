@@ -39,6 +39,7 @@ const LoginPage: React.FC = () => {
           password: userData.password,
         }
       );
+      alert('Log in');
       console.log('Login successful', response.data);
       navigate('/dashboard');
     } catch (error: any) {

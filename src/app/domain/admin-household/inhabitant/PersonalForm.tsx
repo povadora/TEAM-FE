@@ -38,7 +38,7 @@ interface PersonalFormProps {
     middleName: string;
     lastName: string;
     householdRole: householdRole | null;
-    inhabitantGender: inhabitantGender | null;
+    gender: inhabitantGender | null;
     isRepresentative: boolean;
     birthday: string;
     email: string;
@@ -113,10 +113,10 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
 
         <label>Inhabitant Gender</label>
         <Dropdown<inhabitantGender>
-          name="inhabitantGender"
+          name="gender"
           values={inhabitantGender}
-          selectedValue={formData.inhabitantGender}
-          onChange={(value) => handleDropdownChange('inhabitantGender', value)}
+          selectedValue={formData.gender}
+          onChange={(value) => handleDropdownChange('gender', value)}
         />
 
         <FormInputField

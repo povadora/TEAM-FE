@@ -1,0 +1,21 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #808080; /* Grey border color */
+  border-radius: 30px; /* Rounded border */
+  padding: 5px 10px;
+  background-color: white;
+
+  input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px;
+    border-radius: 30px; /* Ensure input field is rounded */
+  }
+
+  .search-icon {
+    color: #808080; /* Grey icon color */
+    margin-left: 5px;
+  }
+}

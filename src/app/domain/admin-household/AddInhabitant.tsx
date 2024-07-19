@@ -17,7 +17,7 @@ export interface InhabitantFormData {
   middleName: string;
   lastName: string;
   householdRole: householdRole | null;
-  inhabitantGender: inhabitantGender | null;
+  gender: inhabitantGender | null;
   isRepresentative: boolean;
   birthday: string;
   email: string;
@@ -45,7 +45,7 @@ const initialFormData: InhabitantFormData = {
   middleName: '',
   lastName: '',
   householdRole: null,
-  inhabitantGender: null,
+  gender: null,
   isRepresentative: false,
   birthday: '',
   email: '',
@@ -75,25 +75,26 @@ const AddInhabitant: React.FC = () => {
   const navigate = useNavigate();
   const params = useParams();
   console.log('params:', params);
-  const { householdUuid, accountUuid } = params as {
+  const { householdUuid, inhabitantUuid } = params as {
     householdUuid: string;
-    accountUuid?: string;
+    inhabitantUuid: string;
   };
 
   useEffect(() => {
+    console.log('inhabitantUuid:', inhabitantUuid);
     console.log('householdUuid:', householdUuid);
-    if (accountUuid) {
+    if (inhabitantUuid) {
       axiosInstance
-        .get(`/inhabitant/${accountUuid}`)
+        .get(`/inhabitant/${inhabitantUuid}`)
         .then((response) => {
           setFormData(response.data);
           setIsEditMode(true);
         })
         .catch((error) => {
-          console.error('Error fetching household data:', error);
+          console.error('Error fetching inhabitant data:', error);
         });
     }
-  }, [accountUuid, householdUuid]);
+  }, [inhabitantUuid, householdUuid]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -139,10 +140,12 @@ const AddInhabitant: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!householdUuid) {
-      console.error('Household UUID is undefined!');
+    if (isEditMode && !inhabitantUuid) {
+      console.error('Inhabitant UUID is undefined!');
       return;
     }
+
+    console.log('Submitting form data:', formData);
 
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
@@ -150,16 +153,23 @@ const AddInhabitant: React.FC = () => {
       if (value !== null && value !== undefined) {
         if (value instanceof File) {
           formDataToSend.append(key, value);
+        } else if (typeof value === 'object' && value !== null) {
+          formDataToSend.append(key, JSON.stringify(value));
         } else {
           formDataToSend.append(key, value.toString());
         }
       }
     });
 
+    // formDataToSend.delete('household');
+
+    if (householdUuid) {
+      formDataToSend.append('householdUuid', householdUuid);
+    }
     try {
       const response = isEditMode
         ? await axiosInstance.patch(
-            `/inhabitant/update-inhabitant/${householdUuid}`,
+            `/inhabitant/update-inhabitant/${inhabitantUuid}`,
             formDataToSend,
             {
               headers: {
@@ -176,10 +186,10 @@ const AddInhabitant: React.FC = () => {
               },
             }
           );
+      console.log(response.data);
       isEditMode
         ? alert('Updated Successfully!')
         : alert('Added Successfully!');
-      console.log(response.data);
       navigate('/dashboard/household');
     } catch (error: any) {
       if (error.response) {
